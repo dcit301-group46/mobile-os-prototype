@@ -185,11 +185,15 @@ npm run dev
 
 ### Branch Strategy
 
-- `main` - Stable production-ready code
-- `dev` - Integration branch for testing
+- `dev` - Default branch for active development (protected)
+- `review` - Integration testing and QA (protected)
+- `prod` - Production-ready code for demos and submission (protected)
 - `feature/*` - Individual feature development
+- `main` - Historical reference (rarely used)
 
 ### Workflow Process
+
+**Note:** When you clone the repository, you'll automatically be on the `dev` branch.
 
 1. Create feature branch from `dev`:
 ```bash
