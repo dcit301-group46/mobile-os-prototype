@@ -116,20 +116,6 @@ My system tracks how much memory is being used and frees it when apps close.
 3. **SimpleDemo.jsx** - Working demonstration
 4. **This Documentation** - Explanation of my work
 
-## Presentation Points
-
-**What to say:**
-1. "I built the Application Lifecycle Management system"
-2. "It controls how apps launch, run, pause, and close"
-3. "Apps go through 5 states: INSTALLED → RUNNING → PAUSED → STOPPED → TERMINATED"
-4. "My system manages memory and multitasking automatically"
-5. **[Show demo]** "Watch what happens when I launch apps..."
-
-**Total Time:** 5-7 minutes
-
----
-
 **Developer:** Mabel  
 **Role:** Application Lifecycle Management  
-**Date:** January 2026  
-**Status:** Complete ✅
+
