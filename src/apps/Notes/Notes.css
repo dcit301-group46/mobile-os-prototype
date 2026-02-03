@@ -1,0 +1,478 @@
+.notes-app .app-body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: #F2F2F7;
+}
+
+/* Notes Header */
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 16px 16px;
+  background: #F2F2F7;
+}
+
+.notes-header h2 {
+  font-size: 34px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0;
+  letter-spacing: -0.5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.btn-new-note {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #007AFF;
+  color: #FFFFFF;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.15s ease;
+}
+
+.btn-new-note:active {
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 12px;
+  background: #F2F2F7;
+  position: relative;
+}
+
+.search-icon {
+  color: #8E8E93;
+  font-size: 16px;
+  position: absolute;
+  left: 28px;
+  z-index: 1;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 12px 10px 36px;
+  border: none;
+  background: #FFFFFF;
+  border-radius: 10px;
+  font-size: 17px;
+  color: #000000;
+  outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.search-input::placeholder {
+  color: #8E8E93;
+}
+
+/* Notes List */
+.notes-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.note-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px;
+  background: #FFFFFF;
+  border-bottom: 0.5px solid #C6C6C8;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  min-height: 72px;
+}
+
+.note-item:active {
+  background: #F2F2F7;
+}
+
+.note-item-content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.note-item-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.4px;
+}
+
+.note-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: #8E8E93;
+  line-height: 1.4;
+}
+
+.note-separator {
+  color: #C7C7CC;
+}
+
+.note-item-preview {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-item-date {
+  flex-shrink: 0;
+}
+
+.note-chevron {
+  color: #C7C7CC;
+  font-size: 13px;
+  margin-left: 12px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* Editor View */
+.editor-view {
+  background: #FFFFFF;
+  padding: 0;
+}
+
+.note-title-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 24px 20px 12px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #000000;
+  outline: none;
+  letter-spacing: -0.6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.note-title-input::placeholder {
+  color: #C7C7CC;
+  font-weight: 600;
+}
+
+.note-content-input {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0 20px 24px;
+  font-size: 17px;
+  color: #000000;
+  outline: none;
+  resize: none;
+  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.note-content-input::placeholder {
+  color: #C7C7CC;
+}
+
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-top: 0.5px solid #C6C6C8;
+  background: #F2F2F7;
+}
+
+.note-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.note-timestamp {
+  font-size: 13px;
+  color: #8E8E93;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.note-stats {
+  font-size: 13px;
+  color: #8E8E93;
+}
+
+/* Back Button */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: #007AFF;
+  cursor: pointer;
+  font-size: 17px;
+  padding: 0;
+  transition: all 0.15s ease;
+  font-weight: 400;
+}
+
+.back-btn:active {
+  opacity: 0.6;
+}
+
+/* Editor Actions */
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+  margin-right: 12px;
+}
+
+.save-indicator {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.save-indicator .saving {
+  color: #8E8E93;
+}
+
+.save-indicator .saved {
+  color: #34C759;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu-btn {
+  border: none;
+  background: transparent;
+  color: #007AFF;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 18px;
+  transition: all 0.15s ease;
+}
+
+.menu-btn:active {
+  opacity: 0.6;
+}
+
+/* Note Menu */
+.note-menu {
+  position: absolute;
+  top: 52px;
+  right: 16px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  min-width: 200px;
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  color: #000000;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-align: left;
+}
+
+.menu-item:active {
+  background: #F2F2F7;
+}
+
+.menu-item.delete-item {
+  color: #FF3B30;
+}
+
+/* Empty State */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  background: #F2F2F7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: #8E8E93;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.4px;
+}
+
+.empty-state p {
+  font-size: 17px;
+  color: #8E8E93;
+  margin: 0 0 28px 0;
+  line-height: 1.4;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  background: #007AFF;
+  color: #FFFFFF;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-primary:active {
+  opacity: 0.8;
+  transform: scale(0.96);
+}
+
+/* Permission Request */
+.permission-request {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  padding: 20px;
+}
+
+.permission-modal {
+  background: #FFFFFF;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 270px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.permission-content {
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.permission-icon {
+  width: 64px;
+  height: 64px;
+  background: #F2F2F7;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 32px;
+  color: #007AFF;
+}
+
+.permission-content h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.4px;
+}
+
+.permission-content p {
+  font-size: 13px;
+  color: #000000;
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.6;
+}
+
+.permission-buttons {
+  border-top: 0.5px solid #C6C6C8;
+  display: flex;
+}
+
+.permission-btn {
+  flex: 1;
+  padding: 11px 16px;
+  border: none;
+  background: transparent;
+  color: #007AFF;
+  font-size: 17px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.permission-btn:active {
+  background: #F2F2F7;
+}
+
+.permission-btn.primary {
+  font-weight: 600;
+}
+
+.permission-btn.cancel {
+  color: #000000;
+  border-right: 0.5px solid #C6C6C8;
+}

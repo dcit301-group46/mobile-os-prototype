@@ -7,19 +7,19 @@ import { useSystem } from '../system/SystemContext'
  * Security: Validates battery level bounds
  */
 const BATTERY_DRAIN_RATES = {
-  screenOn: 0.05,        // 0.05% per second when screen on
-  screenOff: 0.01,       // 0.01% per second when locked
-  appRunning: 0.02,      // 0.02% per app running
-  wifiOn: 0.01,          // 0.01% when wifi active
-  cellularOn: 0.015,     // 0.015% when cellular active
-  charging: -0.2         // -0.2% means +0.2% when charging
+  screenOn: 0.008,       // 0.008% per second when screen on (~2.8%/hour)
+  screenOff: 0.001,      // 0.001% per second when locked (~0.36%/hour)
+  appRunning: 0.003,     // 0.003% per app running
+  wifiOn: 0.002,         // 0.002% when wifi active
+  cellularOn: 0.004,     // 0.004% when cellular active
+  charging: -0.15        // -0.15% means +0.15%/sec (~9%/min, full charge in ~11min)
 }
 
 const LOW_BATTERY_THRESHOLD = 20
 const CRITICAL_BATTERY_THRESHOLD = 10
 
 export const useBatteryManager = () => {
-  const { systemState, updateBatteryLevel } = useSystem()
+  const { systemState, updateBatteryLevel, toggleCharging: systemToggleCharging } = useSystem()
 
   // Calculate total drain rate based on system state
   const calculateDrainRate = useCallback(() => {
@@ -90,10 +90,8 @@ export const useBatteryManager = () => {
   }, [systemState.isBooted, calculateDrainRate, systemState.battery.level, updateBatteryLevel])
 
   const toggleCharging = useCallback(() => {
-    const newChargingState = !systemState.battery.isCharging
-    // Update charging state via SystemContext
-    updateBatteryLevel(systemState.battery.level) // Trigger update
-  }, [systemState.battery.isCharging, systemState.battery.level, updateBatteryLevel])
+    systemToggleCharging()
+  }, [systemToggleCharging])
 
   const getBatteryStatus = useCallback(() => {
     const level = systemState.battery.level

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
   faWifi, 
@@ -9,20 +10,27 @@ import {
   faBatteryEmpty,
   faBolt
 } from '@fortawesome/free-solid-svg-icons'
-import { useSystem } from '../../system/SystemContext'
 import { useBatteryManager } from '../../services/BatteryManager'
 import { useConnectivityManager } from '../../services/ConnectivityManager'
 import './StatusBar.css'
 
 /**
  * StatusBar - System status indicators
- * Memory efficient: No local state, reads from system context
+ * Memory efficient: Minimal local state, live updates
  * Security: Read-only display component
  */
-const StatusBar = () => {
-  const { systemState } = useSystem()
+const StatusBar = ({ darkMode = false }) => {
+  const [currentTime, setCurrentTime] = useState(new Date())
   const { batteryLevel, isCharging } = useBatteryManager()
   const { wifi, cellular, signalStrength } = useConnectivityManager()
+
+  // Update time every minute
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 60000) // Update every minute
+    return () => clearInterval(timer)
+  }, [])
 
   const getBatteryIcon = () => {
     if (batteryLevel > 75) return faBatteryFull
@@ -32,10 +40,10 @@ const StatusBar = () => {
     return faBatteryEmpty
   }
 
-  const getBatteryClass = () => {
-    if (batteryLevel <= 10) return 'critical'
-    if (batteryLevel <= 20) return 'low'
-    return 'normal'
+  const getBatteryColor = () => {
+    if (batteryLevel <= 10) return '#FF3B30'
+    if (batteryLevel <= 20) return '#FF9500'
+    return darkMode ? '#FFFFFF' : '#000000'
   }
 
   const formatTime = (date) => {
@@ -47,32 +55,38 @@ const StatusBar = () => {
   }
 
   return (
-    <div className="status-bar">
+    <div className={`status-bar ${darkMode ? 'dark' : ''}`}>
       <div className="status-left">
-        <span className="time">{formatTime(systemState.system.time)}</span>
+        <span className="time">{formatTime(currentTime)}</span>
       </div>
 
       <div className="status-right">
         {/* Connectivity indicators */}
         {wifi && (
-          <div className="status-icon" title="WiFi Connected">
+          <div className="status-icon connectivity" title="WiFi Connected">
             <FontAwesomeIcon icon={faWifi} />
           </div>
         )}
         
         {cellular && (
-          <div className="status-icon" title={`Signal: ${signalStrength} bars`}>
+          <div className="status-icon connectivity" title={`Signal: ${signalStrength} bars`}>
             <FontAwesomeIcon icon={faSignal} />
           </div>
         )}
 
         {/* Battery indicator */}
-        <div className={`status-icon battery ${getBatteryClass()}`} title={`Battery: ${Math.round(batteryLevel)}%`}>
+        <div className="battery-container" title={`Battery: ${Math.round(batteryLevel)}%`}>
           {isCharging && (
             <FontAwesomeIcon icon={faBolt} className="charging-icon" />
           )}
-          <FontAwesomeIcon icon={getBatteryIcon()} />
-          <span className="battery-percent">{Math.round(batteryLevel)}%</span>
+          <FontAwesomeIcon 
+            icon={getBatteryIcon()} 
+            className="battery-icon"
+            style={{ color: getBatteryColor() }}
+          />
+          <span className="battery-percent" style={{ color: getBatteryColor() }}>
+            {Math.round(batteryLevel)}%
+          </span>
         </div>
       </div>
     </div>

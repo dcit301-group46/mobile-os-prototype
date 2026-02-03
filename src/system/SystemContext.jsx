@@ -40,10 +40,31 @@ export const SystemProvider = ({ children }) => {
       const saved = localStorage.getItem('mobile-os-state')
       if (saved) {
         const parsed = JSON.parse(saved)
+        // Calculate battery restoration
+        let batteryLevel = parsed.battery?.level || 85
+        
+        // If battery was at 0 or very low, reset to reasonable level
+        if (batteryLevel < 5) {
+          batteryLevel = 85
+        }
+        
+        // If last update was more than 1 hour ago, assume device was "charged"
+        const lastUpdate = parsed.battery?.lastUpdate || Date.now()
+        const timeSinceUpdate = Date.now() - lastUpdate
+        if (timeSinceUpdate > 3600000) { // 1 hour
+          batteryLevel = Math.min(100, batteryLevel + 15)
+        }
+        
         return {
           ...INITIAL_STATE,
           ...parsed,
           isBooted: false, // Always start unbooted
+          battery: {
+            level: batteryLevel,
+            isCharging: false,
+            powerSaveMode: batteryLevel <= 20,
+            lastUpdate: Date.now()
+          },
           system: {
             ...INITIAL_STATE.system,
             time: new Date()
@@ -150,6 +171,17 @@ export const SystemProvider = ({ children }) => {
     }))
   }, [])
 
+  // Toggle charging
+  const toggleCharging = useCallback(() => {
+    setSystemState(prev => ({
+      ...prev,
+      battery: {
+        ...prev.battery,
+        isCharging: !prev.battery.isCharging
+      }
+    }))
+  }, [])
+
   // Grant permission
   const grantPermission = useCallback((appId, permissionType) => {
     setSystemState(prev => ({
@@ -243,6 +275,7 @@ export const SystemProvider = ({ children }) => {
     
     // Battery actions
     updateBatteryLevel,
+    toggleCharging,
     
     // Connectivity actions
     toggleWifi,

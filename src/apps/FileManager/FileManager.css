@@ -1,0 +1,625 @@
+.filemanager-app .app-body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: #F2F2F7;
+}
+
+/* Storage Info */
+.storage-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #FFFFFF;
+  border-bottom: 0.5px solid #C6C6C8;
+}
+
+.storage-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #007AFF 0%, #0051D5 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 20px;
+}
+
+.storage-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.storage-bar {
+  height: 4px;
+  background: #E5E5EA;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.storage-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #007AFF 0%, #00C7FF 100%);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.storage-text {
+  font-size: 13px;
+  color: #8E8E93;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #FFFFFF;
+  border-bottom: 0.5px solid #C6C6C8;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: #007AFF;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.breadcrumb-item:active {
+  background: #E5F2FF;
+}
+
+.breadcrumb-segment {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-separator {
+  color: #C7C7CC;
+  font-size: 12px;
+  margin: 0 4px;
+}
+
+/* Toolbar */
+.filemanager-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #F2F2F7;
+}
+
+.search-bar-files {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar-files .search-icon {
+  position: absolute;
+  left: 12px;
+  color: #8E8E93;
+  font-size: 16px;
+  z-index: 1;
+}
+
+.search-bar-files .search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: none;
+  background: #FFFFFF;
+  border-radius: 10px;
+  font-size: 17px;
+  color: #000000;
+  outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.search-bar-files .search-input::placeholder {
+  color: #8E8E93;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.view-toggle {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #FFFFFF;
+  color: #8E8E93;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.15s ease;
+}
+
+.view-toggle.active {
+  background: #007AFF;
+  color: #FFFFFF;
+}
+
+.view-toggle:active {
+  transform: scale(0.95);
+}
+
+.btn-new {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #007AFF;
+  color: #FFFFFF;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.15s ease;
+}
+
+.btn-new:active {
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+.new-menu {
+  position: absolute;
+  top: 44px;
+  right: 0;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 100;
+  min-width: 180px;
+}
+
+.new-menu button {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  color: #000000;
+  text-align: left;
+  cursor: pointer;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.15s ease;
+  border-bottom: 0.5px solid #C6C6C8;
+}
+
+.new-menu button:last-child {
+  border-bottom: none;
+}
+
+.new-menu button:active {
+  background: #F2F2F7;
+}
+
+.new-menu button svg {
+  color: #007AFF;
+  font-size: 18px;
+}
+
+/* File List - List View */
+.file-list {
+  flex: 1;
+  overflow-y: auto;
+  background: #FFFFFF;
+}
+
+.file-list.list-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-list.list-view .file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #C6C6C8;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.file-list.list-view .file-item:active {
+  background: #F2F2F7;
+}
+
+.file-list.list-view .file-item.selected {
+  background: #E5F2FF;
+}
+
+.file-list.list-view .file-item-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 32px;
+}
+
+/* File List - Grid View */
+.file-list.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.file-list.grid-view .file-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-radius: 12px;
+  position: relative;
+}
+
+.file-list.grid-view .file-item:active {
+  background: #E5F2FF;
+  transform: scale(0.95);
+}
+
+.file-list.grid-view .file-item.selected {
+  background: #E5F2FF;
+}
+
+.file-list.grid-view .file-item-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.file-list.grid-view .file-item-content {
+  width: 100%;
+  text-align: center;
+}
+
+.file-list.grid-view .file-item-meta {
+  display: none;
+}
+
+.file-list.grid-view .file-item-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+/* File Item Common Styles */
+.file-item-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.file-item-name {
+  font-size: 15px;
+  font-weight: 400;
+  color: #000000;
+  margin: 0 0 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.2px;
+}
+
+.file-item-meta {
+  font-size: 13px;
+  color: #8E8E93;
+  margin: 0;
+}
+
+.file-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.btn-menu {
+  border: none;
+  background: transparent;
+  color: #8E8E93;
+  cursor: pointer;
+  padding: 6px;
+  font-size: 18px;
+  transition: all 0.15s ease;
+  border-radius: 6px;
+}
+
+.btn-menu:active {
+  background: #E5E5EA;
+}
+
+.context-menu {
+  position: absolute;
+  top: 32px;
+  right: 0;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 100;
+  min-width: 160px;
+}
+
+.context-menu button {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  color: #000000;
+  text-align: left;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.15s ease;
+  border-bottom: 0.5px solid #C6C6C8;
+}
+
+.context-menu button:last-child {
+  border-bottom: none;
+}
+
+.context-menu button:active {
+  background: #F2F2F7;
+}
+
+.context-menu button.delete-option {
+  color: #FF3B30;
+}
+
+.context-menu button svg {
+  font-size: 16px;
+}
+
+/* Empty State */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  background: #F2F2F7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: #8E8E93;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.4px;
+}
+
+.empty-state p {
+  font-size: 17px;
+  color: #8E8E93;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Delete Confirmation */
+.delete-confirmation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  padding: 20px;
+}
+
+.delete-modal {
+  background: #FFFFFF;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 270px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.delete-content {
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.delete-content h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.4px;
+}
+
+.delete-content p {
+  font-size: 13px;
+  color: #000000;
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.6;
+}
+
+.delete-buttons {
+  border-top: 0.5px solid #C6C6C8;
+  display: flex;
+}
+
+.delete-btn {
+  flex: 1;
+  padding: 11px 16px;
+  border: none;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.delete-btn:active {
+  background: #F2F2F7;
+}
+
+.delete-btn.cancel {
+  color: #007AFF;
+  border-right: 0.5px solid #C6C6C8;
+  font-weight: 600;
+}
+
+.delete-btn.confirm {
+  color: #FF3B30;
+  font-weight: 600;
+}
+
+/* Permission Modal */
+.filemanager-app .permission-request {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  padding: 20px;
+}
+
+.filemanager-app .permission-modal {
+  background: #FFFFFF;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 270px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  animation: modalSlideIn 0.3s ease;
+}
+
+.filemanager-app .permission-content {
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.filemanager-app .permission-icon {
+  width: 64px;
+  height: 64px;
+  background: #F2F2F7;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 32px;
+  color: #007AFF;
+}
+
+.filemanager-app .permission-content h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.4px;
+}
+
+.filemanager-app .permission-content p {
+  font-size: 13px;
+  color: #000000;
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.6;
+}
+
+.filemanager-app .permission-buttons {
+  border-top: 0.5px solid #C6C6C8;
+  display: flex;
+}
+
+.filemanager-app .permission-btn {
+  flex: 1;
+  padding: 11px 16px;
+  border: none;
+  background: transparent;
+  color: #007AFF;
+  font-size: 17px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.filemanager-app .permission-btn:active {
+  background: #F2F2F7;
+}
+
+.filemanager-app .permission-btn.primary {
+  font-weight: 600;
+}
+
+.filemanager-app .permission-btn.cancel {
+  color: #000000;
+  border-right: 0.5px solid #C6C6C8;
+}
