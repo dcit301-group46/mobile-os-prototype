@@ -8,6 +8,7 @@ import {
 import { useSystem } from '../../system/SystemContext'
 import StatusBar from '../StatusBar/StatusBar'
 import Calculator from '../../apps/Calculator/Calculator'
+import Settings from '../../apps/Settings/Settings'
 import './HomeScreen.css'
 
 /**
@@ -20,6 +21,8 @@ const HomeScreen = () => {
 
   const renderApp = (appId) => {
     switch (appId) {
+      case 'settings':
+        return <Settings key={appId} />
       case 'calculator':
         return <Calculator key={appId} />
       // Will add more apps here
