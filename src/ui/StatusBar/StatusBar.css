@@ -1,0 +1,80 @@
+.status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  padding-top: 8px;
+  z-index: 1000;
+  font-size: 15px;
+  color: #000000;
+}
+
+.status-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.time {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.status-icon {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #000000;
+  font-size: 15px;
+}
+
+.status-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* Battery specific styles */
+.battery {
+  position: relative;
+}
+
+.battery.low {
+  color: #FF9500;
+}
+
+.battery.critical {
+  color: #FF3B30;
+  animation: batteryPulse 1s infinite;
+}
+
+.battery-percent {
+  font-size: 12px;
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+.charging-icon {
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4caf50;
+  font-size: 12px;
+}
+
+@keyframes batteryPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}

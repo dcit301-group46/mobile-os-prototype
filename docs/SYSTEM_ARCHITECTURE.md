@@ -25,9 +25,11 @@ src/
 │   ├── SystemContext.js        # Global state management
 │   ├── BootManager.js          # System initialization
 │   └── AlertManager.js         # System notifications
-├── navigation/
-│   └── AppRouter.jsx           # Application routing
-└── App.jsx                     # Root component
+├── ui/
+│   ├── LockScreen/            # Lock screen UI
+│   ├── HomeScreen/            # Home screen with app launcher
+│   └── StatusBar/             # System status bar
+└── App.jsx                     # Root component with screen controller
 ```
 
 ## Technical Implementation
@@ -114,21 +116,29 @@ Manages system-level alerts, notifications, and error handling.
 - User acknowledgment tracking
 - Alert history logging
 
-### 4. AppRouter (Navigation)
+### 4. Screen Management (App Overlay System)
 
-Handles screen transitions and application routing.
+Handles screen transitions using a view stacking system that accurately represents real mobile OS behavior.
 
-#### Routes:
-- `/lock` - Lock screen (default)
-- `/home` - Home screen with app drawer
-- `/app/:appId` - Individual application view
-- `/settings` - System settings
+#### Design Rationale:
+Instead of using React Router (web pattern), this OS uses an **app overlay system** that mirrors how actual mobile operating systems (iOS/Android) work:
+- Apps render as overlays on top of the home screen
+- Multiple apps can be in memory simultaneously (background/foreground)
+- Screen states managed via SystemContext (not URL routing)
+- More memory efficient (~50KB lighter than React Router)
+- Better demonstrates OS process management concepts
+
+#### Screen States:
+- **Boot Screen**: System initialization display
+- **Lock Screen**: Authentication and device lock (default)
+- **Home Screen**: App launcher with running apps as overlays
+- **App Views**: Individual apps rendered as full-screen overlays
 
 #### Navigation Features:
-- Back stack management
-- Transition animations
-- Route guards (lock screen protection)
-- Deep linking support
+- State-based screen switching (isBooted, isLocked)
+- App overlay rendering based on runningApps array
+- Direct state manipulation (no route matching overhead)
+- Instant transitions (no route change delays)
 
 ## Operating System Concepts Demonstrated
 
@@ -182,7 +192,8 @@ Handles screen transitions and application routing.
 
 ### UI Components (Herbert)
 - Renders based on SystemContext state
-- Triggers navigation via AppRouter
+- Screen switching via state flags (isLocked, isBooted)
+- Apps render as overlays when in runningApps array
 - Displays AlertManager notifications
 
 ## Development Guidelines
@@ -193,11 +204,11 @@ Handles screen transitions and application routing.
 3. **Minimal Re-renders**: Optimize context value memoization
 4. **Persistence**: Save critical state to localStorage
 
-### Navigation Rules
-1. **Always use AppRouter**: Never manipulate URLs directly
-2. **Guard Protected Routes**: Check lock screen status
-3. **Clean Transitions**: Ensure smooth animations
-4. **Back Stack**: Maintain navigation history
+### Screen Management Rules
+1. **Use SystemContext State**: Screen changes via state updates (unlockScreen, lockScreen)
+2. **Guard Screen Access**: Check isBooted and isLocked before rendering
+3. **Clean Transitions**: CSS transitions for screen changes
+4. **App Stack**: Running apps maintained in runningApps array
 
 ### Boot Sequence Optimization
 1. **Async Operations**: Use promises for service initialization
@@ -280,13 +291,24 @@ showAlert({
 })
 ```
 
-### AppRouter Hooks
+### Screen Management API
 
 ```javascript
-import { useNavigate } from 'react-router-dom'
+import { useSystem } from './system/SystemContext'
 
-const navigate = useNavigate()
-navigate('/app/calculator')
+const { unlockScreen, lockScreen, launchApp, closeApp } = useSystem()
+
+// Navigate to home screen
+unlockScreen()
+
+// Launch an app (renders as overlay)
+launchApp('calculator')
+
+// Close app (removes from runningApps)
+closeApp('calculator')
+
+// Lock device
+lockScreen()
 ```
 
 ## Documentation and Code Comments
@@ -319,12 +341,14 @@ export default SystemCore
 
 This module directly demonstrates the following OS concepts required by the project:
 
-**Process Management** - App lifecycle and state management  
-**Memory Management** - Resource allocation and cleanup  
-**Inter-Process Communication** - SystemContext and event bus  
-**Boot Sequence** - System initialization process  
-**Resource Coordination** - Service orchestration  
+**Process Management** - App lifecycle and state management with overlay system  
+**Memory Management** - Resource allocation, cleanup, and efficient state-based rendering  
+**Inter-Process Communication** - SystemContext shared state (like shared memory)  
+**Boot Sequence** - Multi-stage system initialization process  
+**Resource Coordination** - Service orchestration via centralized state  
 **Error Handling** - AlertManager and graceful degradation  
+**Context Switching** - App foreground/background state management  
+**View Controller Stack** - App overlay system mimicking iOS/Android architecture  
 
 ## Contact
 
