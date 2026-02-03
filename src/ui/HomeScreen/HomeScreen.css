@@ -1,0 +1,109 @@
+.home-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-content {
+  flex: 1;
+  padding: 70px 20px 100px;
+  overflow-y: auto;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.app-icon-container:hover {
+  transform: scale(1.1);
+}
+
+.app-icon-container:active {
+  transform: scale(0.95);
+}
+
+.app-icon {
+  width: 80px;
+  height: 80px;
+  background: #007AFF;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.app-icon-container:hover .app-icon {
+  transform: scale(0.95);
+}
+
+.app-name {
+  font-size: 13px;
+  color: #000000;
+  text-align: center;
+  font-weight: 400;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: rgba(242, 242, 247, 0.8);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  padding-bottom: 20px;
+}
+
+.lock-button {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 12px;
+  background: #007AFF;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lock-button:hover {
+  background: #0051D5;
+}
+
+.lock-button:active {
+  transform: scale(0.96);
+}
+
+
